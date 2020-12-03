@@ -44,7 +44,7 @@ func main() {
                 trees++
             }
         }
-        fmt.Printf("Slope %d,%d hits %d trees\n",s.run, s.rise, trees)
+        fmt.Printf("Slope %d,%d hits %d trees\n",s.rise, s.run, trees)
         result = result * trees
     }
     fmt.Printf("Result: %d\n", result)
