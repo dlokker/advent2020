@@ -21,33 +21,16 @@ func main() {
     }
     
     var slopes = []slope { 
-        slope {
-            rise: 1,
-            run: 1,
-        },
-        slope {
-            rise: 1,
-            run: 3,
-        },
-        slope {
-            rise: 1,
-            run: 5,
-        },
-        slope {
-            rise: 1,
-            run: 7,
-        },
-        slope {
-            rise: 2,
-            run: 1,
-        },
+        slope { rise: 1, run: 1, },
+        slope { rise: 1, run: 3, },
+        slope { rise: 1, run: 5, },
+        slope { rise: 1, run: 7, },
+        slope { rise: 2, run: 1, },
     }
 
     result := 1
     for _, s := range slopes {
-        x := 0
-        y := 0
-        trees := 0
+        var x, y, trees int
         for {
             x += s.run
             y += s.rise
