@@ -27,9 +27,6 @@ func buildPass(p *passport, fields []string) {
 func checkValid(p *passport) bool {
     r := reflect.ValueOf(p)
     for _, f := range constFields {
-        if f == "Cid" {
-            continue
-        }
         v := reflect.Indirect(r).FieldByName(f).String()
         if v == "" {
             return false
@@ -91,16 +88,15 @@ func checkValid(p *passport) bool {
     return true
 }
 
-var constFields [8]string
+var constFields [7]string
 
 func main() {
     file, _ := os.Open("/Users/dlokk/code/advent2020/day4/input.txt")
     defer file.Close()
     scanner := bufio.NewScanner(file)
 
-    constFields = [...]string{"Byr", "Iyr", "Eyr", "Hgt", "Hcl", "Ecl", "Pid", "Cid"}
+    constFields = [...]string{"Byr", "Iyr", "Eyr", "Hgt", "Hcl", "Ecl", "Pid"}
     valid := 0
-    entries := []passport{}
     p := passport{}
     for scanner.Scan() {
         line := scanner.Text()
@@ -110,7 +106,6 @@ func main() {
             if checkValid(&p) {
                 valid++
             }
-            entries = append(entries, p)
             p = passport{}
         }
     }
