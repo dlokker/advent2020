@@ -5,25 +5,15 @@ import (
     "fmt"
     "os"
     "strconv"
+    "strings"
 )
 
 func calcId(s string) uint64 {
-    row := ""
-    col := ""
-    for _, c := range s {
-        switch string(c) {
-        case "F":
-            row += "0"
-        case "B":
-            row += "1"
-        case "R":
-            col += "1"
-        case "L":
-            col += "0"
-        default:
-            fmt.Printf("invalid input: %v\n", c)
-        }
-    }
+    row := strings.Replace(s[0:7], "F", "0", -1)
+    row = strings.Replace(row, "B", "1", -1)
+    col := strings.Replace(s[len(s)-3:], "L", "0", -1)
+    col = strings.Replace(col, "R", "1", -1)
+
     ri, _ := strconv.ParseUint(row, 2, 32)
     ci, _ := strconv.ParseUint(col, 2, 32)
 
