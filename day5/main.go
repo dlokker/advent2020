@@ -9,7 +9,7 @@ import (
 )
 
 func calcId(s string) uint64 {
-    row := strings.Replace(s[0:7], "F", "0", -1)
+    row := strings.Replace(s[:7], "F", "0", -1)
     row = strings.Replace(row, "B", "1", -1)
     col := strings.Replace(s[len(s)-3:], "L", "0", -1)
     col = strings.Replace(col, "R", "1", -1)
@@ -22,8 +22,7 @@ func calcId(s string) uint64 {
     }
     seats[ri][ci] = true
     
-    res := (ri * 8) + ci
-    return res
+    return (ri * 8) + ci
 }
 
 var seats = make(map[uint64][]bool)
@@ -36,8 +35,7 @@ func main() {
     ids := make(map[uint64]bool)
     var max uint64
     for scanner.Scan() {
-        line := scanner.Text()
-        id := calcId(line)
+        id := calcId(scanner.Text())
         ids[id] = true
         if id > max {
             max = id
@@ -48,7 +46,6 @@ func main() {
     for k, v := range seats{
         for i, s := range v {
             if s == false {
-                // fmt.Printf("Seat %v,%v is empty\n",k,i)
                 id := (k*8)+uint64(i)
                 if _, ok := ids[id+1]; ok {
                     if _, okk := ids[id-1]; okk {
